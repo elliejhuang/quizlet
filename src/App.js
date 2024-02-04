@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import CardEditor from './CardEditor';
+import CardViewer from './CardViewer';
 
-function App() {
+function App(props) {
+
+  const [cards, setCards] = useState([
+    {front: 'front', back: 'back'},
+    {front: 'front1', back: 'back2'}
+    ]);
+
+  const [editor, setEditor] = useState (true);
+
+  const addCard = (card) => {
+    
+    console.log(card)
+    const newCards = cards.slice().concat(card);
+    setCards(newCards)
+    
+  };
+
+  const deleteCard = (index) => {
+    const newCards = cards.slice();
+    newCards = cards.splice(index, 1);
+    setCards(newCards);
+  };
+
+
+  const switchMode = () => {
+    setEditor(!editor);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    {editor ? <CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode}/> : <CardViewer switchMode = {switchMode} />}
     </div>
-  );
+  ) 
 }
 
 export default App;
