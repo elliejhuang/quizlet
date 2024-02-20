@@ -16,14 +16,31 @@ function App(props) {
     console.log(card)
     const newCards = cards.slice().concat(card);
     setCards(newCards)
+    console.log("newCards", newCards)
     
   };
 
   const deleteCard = (index) => {
-    const newCards = cards.slice();
-    newCards = cards.splice(index, 1);
+    console.log(index)
+    let newCards = cards.slice();
+    newCards.splice(index, 1);
     setCards(newCards);
   };
+
+
+  const editCard = (inputFront, inputBack, index) => {
+    let newCards=cards.map((i, card) => {
+      if (i === index){
+        return {front: inputFront, back: inputBack}
+      }
+      else {
+        return card
+      }
+
+    });
+
+    setCards(newCards);
+  }
 
 
   const switchMode = () => {
@@ -32,7 +49,7 @@ function App(props) {
 
   return (
     <div>
-    {editor ? <CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode}/> : <CardViewer switchMode = {switchMode} />}
+    {editor ? <CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode} editCard = {editCard}/> : <CardViewer switchMode = {switchMode} />}
     </div>
   ) 
 }
