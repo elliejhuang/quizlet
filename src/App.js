@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import CardEditor from './CardEditor';
 import CardViewer from './CardViewer';
+import Card from './Card';
 
 function App(props) {
 
@@ -49,7 +50,7 @@ function App(props) {
 
   return (
     <div>
-    {editor ? <CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode} editCard = {editCard}/> : <CardViewer switchMode = {switchMode} />}
+    {editor ? <CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode} editCard = {editCard}/> : <CardViewer cards = {cards} switchMode = {switchMode} />}
     </div>
   ) 
 }

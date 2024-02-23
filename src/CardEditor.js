@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CardEditor.css';
+import Card from './Card';
 
 function CardEditor (props) {
 
@@ -27,30 +28,10 @@ function CardEditor (props) {
 
 
     const cards = props.cards.map((c,index) => {
-        console.log(c)
+        return (
+        <Card cards={c} index={index}/>
+        )
 
-
-        if (index===edit) {
-            console.log ("yes its editing", edit)
-            return(
-                <tr key={index}>
-                <input onChange={handleFrontChange} placeholder='Enter new text' value={front}/>
-                <input onChange={handleBackChange} placeholder='Enter new text' value={back}/>
-                <td><button onClick = {() => (props.deleteCard(index))}>Delete card</button></td>
-                <td><button onClick = {() => (handleEdit(index))}>Edit card</button></td>
-                </tr>
-            );
-        }
-        else {
-            return(
-                <tr key={index}>
-                <td>{c.front}</td>
-                <td>{c.back}</td>
-                <td><button onClick = {() => (props.deleteCard(index))}>Delete card</button></td>
-                <td><button onClick = {() => (handleEdit(index))}>Edit card</button></td>
-                </tr>
-            );
-        }
     })
 
     return (
