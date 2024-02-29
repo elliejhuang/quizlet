@@ -6,7 +6,6 @@ function CardEditor (props) {
 
     const [front, setFront] = useState ('')
     const [back, setBack] = useState ('')
-    const [edit, setEdit] = useState(null)
 
 
 
@@ -21,18 +20,26 @@ function CardEditor (props) {
         
     }
 
-    const handleEdit =(event,index) => {
-        props.editCard (front, back, index);
-        setEdit(index);
+    // const editCard =(event,index) => {
+    //     props.editCard (front, back, index);
+    //     // setEdit(true);
+    // }
+
+
+    const deleteCard = (event,index) => {
+        props.deleteCard(index)
     }
 
 
     const cards = props.cards.map((c,index) => {
+        console.log ("cards in cardEditor", c)
         return (
-        <Card cards={c} index={index}/>
+        <Card card={c} index={index} deleteCard= {deleteCard} saveCard={props.saveCard}/>
         )
 
     })
+
+
 
     return (
         <div>

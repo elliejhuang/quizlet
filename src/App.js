@@ -29,19 +29,17 @@ function App(props) {
   };
 
 
-  const editCard = (inputFront, inputBack, index) => {
-    let newCards=cards.map((i, card) => {
-      if (i === index){
-        return {front: inputFront, back: inputBack}
-      }
-      else {
-        return card
-      }
+  const saveCard = (front, back, index) => {
+    console.log ("app savecard", front, back)
+    let newCards = cards.slice()
 
-    });
+    newCards.splice(index, 1, {front, back})
+
+    console.log("this is newCards", newCards)
 
     setCards(newCards);
   }
+
 
 
   const switchMode = () => {
@@ -50,7 +48,7 @@ function App(props) {
 
   return (
     <div>
-    {editor ? <CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode} editCard = {editCard}/> : <CardViewer cards = {cards} switchMode = {switchMode} />}
+    {editor ? <CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode} saveCard = {saveCard}/> : <CardViewer cards = {cards} switchMode = {switchMode} />}
     </div>
   ) 
 }

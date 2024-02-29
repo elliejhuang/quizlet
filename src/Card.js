@@ -7,7 +7,6 @@ function Card(props) {
     const [back, setBack] = useState ('')
     const [editState, setEdit] = useState (false)
 
-    console.log("console log here:",props.cards)
 
     const handleFrontChange = event => {
         console.log("front", event.target.value);
@@ -17,33 +16,40 @@ function Card(props) {
     const handleBackChange = event => {
         console.log("back:" ,event.target.value);
         setBack (event.target.value)
-        
     }
 
-    const handleEdit =(event,index) => {
-        props.editCard (front, back, index);
-        setEdit(props.index);
+    const editCard = event => {
+        setEdit(true);
     }
+
+    const saveCard = event => {
+        console.log(front, back)
+        props.saveCard (front, back, props.index);
+        setEdit(false)
+    }
+
+
+
 
     if (editState===true) {
         console.log("console log here:",props.cards)
         return(
             <tr key={props.index}>
-            <input onChange={handleFrontChange} placeholder='Enter new text' value={front}/>
-            <input onChange={handleBackChange} placeholder='Enter new text' value={back}/>
+            <td><input onChange={handleFrontChange} placeholder='Enter new text' value={front}/></td>
+            <td><input onChange={handleBackChange} placeholder='Enter new text' value={back}/></td>
             <td><button onClick = {() => (props.deleteCard(props.index))}>Delete card</button></td>
-            <td><button onClick = {() => (handleEdit(props.index))}>Edit card</button></td>
+            <td><button onClick = {() => (saveCard())}>Save card</button></td>
             </tr>
         );
     }
     else {
-        console.log("console log here:",props.cards)
+        console.log("SAVE", props.card)
         return(
             <tr key={props.index}>
-            <td>{props.cards.front}</td>
-            <td>{props.cards.back}</td>
+            <td>{props.card.front}</td>
+            <td>{props.card.back}</td>
             <td><button onClick = {() => (props.deleteCard(props.index))}>Delete card</button></td>
-            <td><button onClick = {() => (handleEdit(props.index))}>Edit card</button></td>
+            <td><button onClick = {() => (editCard(props.index))}>Edit card</button></td>
             </tr>
         );
    }
