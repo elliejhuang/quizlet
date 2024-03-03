@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; 
 
 
 function CardViewer (props) {
@@ -25,7 +26,8 @@ const displayCard = () => {
         <button type="button" disabled={index===((props.cards.length)-1)} onClick = {() => setIndex(index + 1)}> next </button>
         <h2> card viewer</h2>
         {displayCard()}
-        <button type="button" onClick = {() => props.switchMode()}> switch to card editor</button>
+        {/* <button type="button" onClick = {() => props.switchMode()}> switch to card editor</button> */}
+        <Link to= "/edit">Card Editor</Link>
         </div>
     );
 };

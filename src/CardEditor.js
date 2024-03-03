@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './CardEditor.css';
 import Card from './Card';
+import { Link } from 'react-router-dom'; 
 
 function CardEditor (props) {
 
@@ -61,7 +62,9 @@ function CardEditor (props) {
             <input onChange={handleFrontChange} placeholder='Front of card' value={front}/>
             <input onChange={handleBackChange} placeholder='Back of card'value={back}/>
             <button onClick = {()=>(props.addCard({front, back}))}> Add Card</button>
-            <button type="button" onClick = {() => props.switchMode()}> switch to card viewer</button>
+            {/* <button type="button" onClick = {() => props.switchMode()}> switch to card viewer</button> */}
+            <Link to= "/viewer">Card Viewer</Link>
+
         </div>
     );
 }
