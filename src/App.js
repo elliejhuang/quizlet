@@ -6,6 +6,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Routes,
+  Navigate,
   Link,
   useRouteMatch,
   useParams,
@@ -54,23 +56,15 @@ function App(props) {
     setEditor(!editor);
   }
   
-  // if (editor === true) {
-  //   return (
-  //     <div>
-  //       <ul>
-  //         <li>
-  //           <Link to="/"> CardEditor </Link>
-  //         </li>
-  //       </ul>
-  //     </div>
-
-  //   )
-  // }
   return (
-    <div>
-    {editor ? <CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode} saveCard = {saveCard}/> : <CardViewer cards = {cards} switchMode = {switchMode} />}
-    </div>
-  ) 
+    <Router>
+      <Routes>
+        <Route path= "/edit" element = {<CardEditor cards={cards} addCard={addCard} deleteCard={deleteCard} switchMode={switchMode} saveCard = {saveCard} />}/>
+        <Route path="/viewer" element = {<CardViewer cards = {cards} switchMode = {switchMode} />}/>
+        <Route path="*" element= {<Navigate to="/edit" />}/>
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
